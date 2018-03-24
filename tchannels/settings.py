@@ -156,3 +156,9 @@ CHANNEL_LAYERS = {
         },
     },
 }
+
+# Import local_settings.py
+try:
+    from local_settings import *
+except ImportError:
+    pass
