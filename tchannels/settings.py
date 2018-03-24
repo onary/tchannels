@@ -25,7 +25,7 @@ SECRET_KEY = 'zd*vx6h7wv*2-ql5rwjpju)$ock*kl1hy(aj0op=pclb_ql2n3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['wezerix.com']
 
 
 # Application definition
