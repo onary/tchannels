@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+{% block title %}Chat App{% endblock %}
+
+{% block content %}
+    <div id="root"></div>
+{% endblock %}
+
+{% block extra_body %}
+    <script src="{% static "app.js" %}"></script>
+{% endblock %}
