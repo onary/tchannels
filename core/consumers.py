@@ -28,8 +28,6 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
     async def disconnect(self, code):
         self.users.remove(self.scope["user"])
 
-        print('disconnected: %s' % (self.scope["user"].username, ))
-
         await self.channel_layer.group_discard(
             self.group_name,
             self.channel_name,
@@ -50,8 +48,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         """
         self.users.add(self.scope["user"])
 
-        print('connected %s ' % (self.scope["user"].username, ))
-
+        # Add them to the group so they get room messages
         await self.channel_layer.group_add(
             self.group_name,
             self.channel_name,
@@ -79,6 +76,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             },
         )
 
+    # These helper methods are named by the types we send - so chat.message becomes chat_message
     async def chat_message(self, event):
         """
         Called when someone has messaged our chat.

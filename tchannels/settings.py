@@ -157,6 +157,8 @@ CHANNEL_LAYERS = {
     },
 }
 
+TEST_RUNNER = 'tchannels.runner.PytestTestRunner'
+
 # Import local_settings.py
 try:
     from local_settings import *
