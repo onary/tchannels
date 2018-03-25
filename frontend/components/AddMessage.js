@@ -15,6 +15,7 @@ const AddMessage = ({ addMessage }) => {
         }}
         type="text"
         ref={(node) => {input = node}}
+        placeholder="Type your message here"
       />
     </section>
   )
