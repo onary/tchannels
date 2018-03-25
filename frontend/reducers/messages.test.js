@@ -6,9 +6,9 @@ describe('Messages reducer', () => {
     expect(messages(undefined, {})).toEqual([])
   })
 
-  it('should handle ADD_MESSAGE and store every message', () => {
+  it('should handle MESSAGE_RECEIVED and store every message', () => {
     expect(messages([], {
-      type: types.ADD_MESSAGE,
+      type: types.MESSAGE_RECEIVED,
       message: 'Hey',
       author: 'Me'
     })).toEqual([
@@ -26,7 +26,7 @@ describe('Messages reducer', () => {
         }
       ],
       {
-        type: types.ADD_MESSAGE,
+        type: types.MESSAGE_RECEIVED,
         message: 'Hey again',
         author: 'Me again'
       }

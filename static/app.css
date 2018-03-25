@@ -1,0 +1,70 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+body {
+    /* font-family: "Press Start 2P"; */
+    font-size: 20px;
+}
+#container {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-areas: "sidebar main";
+    width: 100%;
+    height: calc(100vh - 70px);
+}
+#main {
+    grid-area: main;
+    padding-bottom: 60px;
+    overflow-y: scroll;
+}
+#new-message {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 5px;
+    margin-left: 0px;
+    border-top: 1px solid #3f3f3f;
+}
+#messages-list {
+    padding: 5px 0 0 5px;
+}
+
+#messages-list i {
+    color: #700404;
+}
+#sidebar {
+    grid-area: sidebar;
+    padding: 5px 0 0 5px;
+    border-right: 1px solid #3f3f3f;
+    height: 100%;
+}
+
+#sidebar ul {
+    font-size: 24px;
+    list-style: none;
+    color: #1a266d;
+}
+
+#new-message {
+    padding: 0px;
+    height: 50px;
+}
+
+#new-message input {
+    /* font-family: "Press Start 2P"; */
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    height: 50px;
+    padding: 5px;
+}
+
+small.hint {
+    color: grey;
+}
+
+p.error {
+    color: red;
+}
