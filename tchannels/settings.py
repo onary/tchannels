@@ -159,6 +159,8 @@ CHANNEL_LAYERS = {
 
 TEST_RUNNER = 'tchannels.runner.PytestTestRunner'
 
+CHAT_QUEUE_LEN = 15
+
 # Import local_settings.py
 try:
     from local_settings import *

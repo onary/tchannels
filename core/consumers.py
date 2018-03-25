@@ -1,9 +1,13 @@
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
+from redis_collections import Deque
+from django.conf import settings
+
 
 
 class ChatConsumer(AsyncJsonWebsocketConsumer):
     group_name = "broadcast"
     users = set()
+    messages = Deque([], settings.CHAT_QUEUE_LEN)
 
     async def connect(self):
         if self.scope["user"].is_anonymous:
@@ -62,6 +66,8 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             }
         )
 
+        await self.send_json({"messages": list(self.messages), "type": "ADD_MESSAGES"})
+
 
     # These helper methods are named by the types we send - so broadcast.presence becomes broadcast_presence
     async def broadcast_presence(self, event):
@@ -76,16 +82,19 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             },
         )
 
+
     # These helper methods are named by the types we send - so chat.message becomes chat_message
     async def chat_message(self, event):
         """
         Called when someone has messaged our chat.
         """
-        # Send a message down to the client
-        await self.send_json(
-            {
-                "type": "ADD_MESSAGE",
-                "author": event["username"],
-                "message": event["message"],
-            },
-        )
+        # Save message and send down to the client
+        message = {
+            "author": event["username"],
+            "message": event["message"],
+        }
+
+        self.messages.append(message)
+
+        message["type"] = "ADD_MESSAGE"
+        await self.send_json(message)

@@ -15,6 +15,11 @@ const setupSocket = (dispatch) => {
       case types.USERS_LIST:
         dispatch(populateUsersList(data.users))
         break
+      case types.ADD_MESSAGES:
+        data.messages.forEach((i) => {
+          dispatch(messageReceived(i.message, i.author))
+        })
+        break
       default:
         break
     }

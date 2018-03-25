@@ -22,6 +22,8 @@ pytest==3.5.0
 pytest-asyncio==0.8.0
 pytest-django==3.1.2
 pytz==2018.3
+redis==2.10.6
+redis-collections==0.4.2
 selenium==3.11.0
 six==1.11.0
 Twisted==17.9.0

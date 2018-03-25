@@ -3,6 +3,8 @@
 Django based real-time chat web application for demonstrating power of Django Channels and Sagas.
 Includes tests coverage with py.test and jest.
 
+You can define the length of chat messages history using setting.py variable CHAT_QUEUE_LEN
+
 ### Django Channels React React Redux Saga WebSockets
 
 ### Installation

@@ -28,6 +28,9 @@ async def websocket_consumer_check():
     # test user_1 connected
     assert connected
     response = await communicator1.receive_json_from()
+    assert response ==  {'type': 'ADD_MESSAGES', 'messages': []}
+
+    response = await communicator1.receive_json_from()
     # test users list updated
     assert response ==  {'type': 'USERS_LIST', 'users': [{'id': 1, 'name': 'user_1'}]}
 
@@ -38,6 +41,9 @@ async def websocket_consumer_check():
     connected, _ = await communicator2.connect()
     # test user_2 connected
     assert connected
+
+    response = await communicator2.receive_json_from()
+    assert response ==  {'type': 'ADD_MESSAGES', 'messages': []}
     response = await communicator2.receive_json_from()
     # test users list updated
     assert response ==  {'type': 'USERS_LIST', 'users': [{'id': 1, 'name': 'user_1'}, {'id': 2, 'name': 'user_2'}]}
