@@ -13,7 +13,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "./node_modules/.bin/webpack --progress --production --optimize-minimize",
+    "build": "webpack --progress",
     "test": "jest",
     "eject": "react-scripts eject",
     "dev": "webpack --progress --watch"
