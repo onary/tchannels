@@ -1,12 +1,12 @@
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
-from redis_collections import Deque
+from redis_collections import Deque, Set
 from django.conf import settings
 
 
 
 class ChatConsumer(AsyncJsonWebsocketConsumer):
     group_name = "broadcast"
-    users = set()
+    users = Set()
     messages = Deque([], settings.CHAT_QUEUE_LEN)
 
     async def connect(self):
@@ -27,6 +27,11 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                     "message": content.get("message", None),
                 }
             )
+
+            self.messages.append({
+                "author": self.scope["user"].username,
+                "message": content.get("message", None)
+            })
 
 
     async def disconnect(self, code):
@@ -89,12 +94,8 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         Called when someone has messaged our chat.
         """
         # Save message and send down to the client
-        message = {
+        await self.send_json({
             "author": event["username"],
             "message": event["message"],
-        }
-
-        self.messages.append(message)
-
-        message["type"] = "ADD_MESSAGE"
-        await self.send_json(message)
+            "type": "ADD_MESSAGE"
+        })

@@ -5,7 +5,7 @@ Includes tests coverage with py.test and jest.
 
 You can define the length of chat messages history using settings.py variable CHAT_QUEUE_LEN
 
-### Django Channels React React Redux Saga WebSockets
+### Django Channels React Redux Saga WebSockets
 
 ### Installation
 
